@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+	<style type="text/css">
+		p {padding: 0px;]
+	</style>
+</head> 
+<body> 
+
+	<div data-role="page" id="home" >
+
+		<div data-role="header" data-theme="b">
+			<h1>Feedback</h1>
+		</div><!-- /header -->
+		
+		<div data-role="content" data-theme="b">	
+			
+			<form class="ui-body ui-body-a ui-corner-all" data-ajax="false" action="/mobile/feedback/" method="post">
+			   <div class="fieldwrapper">
+			      {{ form.sender.error }}
+			   	<label for="email">Email:</label>
+					{{ form.sender }}
+				</div>
+			   <div class="fieldwrapper">
+			      {{ form.subject.error }}
+			   	<label for="email">Subject*:</label>
+					{{ form.subject }}
+				</div>
+			   <div class="fieldwrapper">
+			      {{ form.message.error }}
+			   	<label for="email">Message*:</label>
+					{{ form.message }}
+				</div>				
+				<button class="ui-btn-hidden" value="submit-value" name="submit" data-theme="b" type="submit" aria-disabled="false">Submit</button>
+			</form>			
+			
+		</div><!-- /content -->
+		
+		<div data-role="footer" data-theme="b">	
+			<h4>Developed by TIM-SISFO GPO</h4>		
+		</div><!-- /content -->
+
+	</div><!-- /page -->
+
+</body>
+</html>
+
+

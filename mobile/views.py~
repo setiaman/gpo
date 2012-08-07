@@ -1,0 +1,35 @@
+from django.http import HttpResponse
+from django.template import Context, loader, RequestContext
+from mobile.models import Kebaktian
+from datetime import date
+from django import forms
+from django.shortcuts import render_to_response
+
+
+class FeedbackForm(forms.Form):
+    subject = forms.CharField(max_length=100)
+    message = forms.TextField(widget=forms.Textarea)
+    sender = forms.EmailField(required=False, initial="replace with your email")
+
+def feedback(request):
+    #if request.method <> 'POST':
+    form = FeedbackForm()
+    return render_to_response('feedback.html', {'form':form } )
+	 	
+	 
+def index(request):
+    #get latest Kebaktian schedule
+    kset = Kebaktian.objects.filter(tanggal__gte=date.today()).order_by("tanggal")
+    if kset.count() > 0:
+        k = kset[0]
+    else:
+        kset = Kebaktian.objects.filter(tanggal__lte=date.today()).order_by("-tanggal")        
+        k = kset[0]
+
+    pujianList = k.kebaktianitem_set.filter(type='P')
+    ayatList = k.kebaktianitem_set.filter(type='A')
+    
+    t = loader.get_template('index.html')
+    #passing Kebaktian Object to the template
+    c = Context({'Keb': k, 'pujianList': pujianList, 'ayatList': ayatList}) 
+    return HttpResponse(t.render(c))

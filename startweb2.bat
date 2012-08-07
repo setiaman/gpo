@@ -1,0 +1,1 @@
+c:\python27\python.exe manage.py runserver 192.168.1.64:8000
